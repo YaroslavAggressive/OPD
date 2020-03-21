@@ -16,6 +16,7 @@ class DataSet:
     def add_folder(self, folder_name):
         if os.path.isfile(folder_name):
             return True
+        print(folder_name)
         for cur_path in os.listdir(folder_name):
             new_path = folder_name + '/' + cur_path
             if self.add_folder(new_path):
@@ -28,12 +29,12 @@ class DataSet:
         return False
 
     def get_image(self, idx):
-        i = 0
-        while idx > self.__images_amount[i]:
-            i += 1
+        j = 0
+        while idx > self.__images_amount[j]:
+            j += 1
         min_idx = 0
-        if i is not 0:
-            min_idx = self.__images_amount[i - 1]
-        image_path = self.__folders_list[i] + '/' + os.listdir(self.__folders_list[i])[i - min_idx]
+        if j is not 0:
+            min_idx = self.__images_amount[j - 1]
+        image_path = self.__folders_list[j] + '/' + os.listdir(self.__folders_list[j])[idx - min_idx]
 
         return Image.open(image_path)
