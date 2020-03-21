@@ -1,7 +1,7 @@
 import os
 from PIL import Image
 
-
+# Class for dataset
 class DataSet:
     def __init__(self, folder):
         self.__folders_list = []

@@ -9,5 +9,3 @@ img = tmp.get_image(200)
 print("Success")
 plt.imshow(img)
 plt.show()
-
-
