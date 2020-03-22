@@ -21,7 +21,7 @@ class DataSet:
         if os.path.isfile(folder_name):
             return True
         print(folder_name)
-        for cur_path in os.listdir(folder_name):
+        for new_path in os.listdir(folder_name):
             if self.add_folder(new_path):
                 self.__folders_list.append(folder_name)
                 sum = 0
