@@ -5,9 +5,11 @@ from Classes import DataSet
 
 #%% Creating the Dataset
 tmp = DataSet(Constants.archive_name)
-img = tmp.get_image(200)
+print(tmp.get_size())
+#img = tmp.get_image(10000)
 print("Success")
 plt.imshow(img)
 plt.show()
+
 
 

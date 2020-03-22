@@ -2,14 +2,14 @@
 
 import os
 from PIL import Image
-import cv2
+
+# Class for dataset
 
 
-# The class which main function is reading files from the directory
-class FileArr:
-    def __init__(self, folder=None):
-        if folder is None:
-            return
+class DataSet:
+    def __init__(self, folder):
+        self.__folders_list = []
+        self.__images_amount = []
         if os.path.exists(folder):
             self.__position = 0
             self.add_folder(folder)
@@ -22,7 +22,6 @@ class FileArr:
             return True
         print(folder_name)
         for cur_path in os.listdir(folder_name):
-            new_path = folder_name + '/' + cur_path
             if self.add_folder(new_path):
                 self.__folders_list.append(folder_name)
                 sum = 0
@@ -39,6 +38,14 @@ class FileArr:
         min_idx = 0
         if j is not 0:
             min_idx = self.__images_amount[j - 1]
-        image_path = self.__folders_list[j] + '/' + os.listdir(self.__folders_list[j])[idx - min_idx]
+        images_list = os.listdir(self.__folders_list[j])
+        image_path = self.__folders_list[j] + '/' + images_list[idx - min_idx]
+        while idx - min_idx < len(images_list) and "PalletMask" not in images_list[idx - min_idx] :
+            idx += 1
+        mask_path = ""
+        if idx - min_idx < len(images_list):
+            mask_path = self.__folders_list[j] + '/' + images_list[idx - min_idx]
+        return Image.open(image_path), Image.open(mask_path)
 
-        return Image.open(image_path)
+    def get_size(self):
+        return self.__images_amount[-1]
