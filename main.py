@@ -6,10 +6,15 @@ from Classes import DataSet
 #%% Creating the Dataset
 tmp = DataSet(Constants.archive_name)
 print(tmp.get_size())
-#img = tmp.get_image(10000)
-print("Success")
-plt.imshow(img)
-plt.show()
+img, mask = tmp.get_image(3000)
+if mask is None:
+    print("NONE")
+else:
+    print("Success")
+    plt.imshow(img)
+    plt.show()
+    plt.imshow(mask)
+    plt.show()
 
 
 

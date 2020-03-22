@@ -21,7 +21,8 @@ class DataSet:
         if os.path.isfile(folder_name):
             return True
         print(folder_name)
-        for new_path in os.listdir(folder_name):
+        for cur_path in os.listdir(folder_name):
+            new_path = folder_name + '/' + cur_path
             if self.add_folder(new_path):
                 self.__folders_list.append(folder_name)
                 sum = 0
@@ -40,12 +41,13 @@ class DataSet:
             min_idx = self.__images_amount[j - 1]
         images_list = os.listdir(self.__folders_list[j])
         image_path = self.__folders_list[j] + '/' + images_list[idx - min_idx]
-        while idx - min_idx < len(images_list) and "PalletMask" not in images_list[idx - min_idx] :
+        while idx - min_idx < len(images_list) and images_list[idx - min_idx].find("PalleteMask") is -1:
+            print(images_list[idx - min_idx])
             idx += 1
-        mask_path = ""
         if idx - min_idx < len(images_list):
             mask_path = self.__folders_list[j] + '/' + images_list[idx - min_idx]
-        return Image.open(image_path), Image.open(mask_path)
+            return Image.open(image_path), Image.open(mask_path)
+        return Image.open(image_path), None
 
     def get_size(self):
         return self.__images_amount[-1]
