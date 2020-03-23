@@ -2,6 +2,8 @@
 
 import os
 from PIL import Image
+import cv2
+from numpy import array
 
 # Class for dataset
 
@@ -46,8 +48,8 @@ class DataSet:
             idx += 1
         if idx - min_idx < len(images_list):
             mask_path = self.__folders_list[j] + '/' + images_list[idx - min_idx]
-            return Image.open(image_path), Image.open(mask_path)
-        return Image.open(image_path), None
+            return array(Image.open(image_path)), array(Image.open(mask_path))
+        return array(Image.open(image_path)), None
 
     def get_size(self):
         return self.__images_amount[-1]
