@@ -10,7 +10,7 @@ img, mask = tmp.get_image(3000)
 if mask is None:
     print("NONE")
 else:
-    print("Success test")
+    print("Success")
     plt.imshow(img)
     plt.show()
     plt.imshow(mask)
