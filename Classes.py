@@ -8,6 +8,9 @@ from PIL import Image
 
 class DataSet:
     def __init__(self, folder):
+        if not os.path.exists(folder):
+            print("ERROR, WRONG PATH")
+            raise SystemExit
         self.__folders_list = []
         self.__images_amount = []
         if os.path.exists(folder):

@@ -1,6 +1,6 @@
 # Here will be stored objects which are used during the whole period of program
 
-# Insert your way
+
 from getpass import getuser
 
 

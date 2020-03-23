@@ -6,7 +6,7 @@ from Classes import DataSet
 #%% Creating the Dataset
 tmp = DataSet(Constants.archive_name)
 print(tmp.get_size())
-img, mask = tmp.get_image(1000)
+img, mask = tmp.get_image(3000)
 if mask is None:
     print("NONE")
 else:
