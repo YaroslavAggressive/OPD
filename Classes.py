@@ -2,7 +2,7 @@
 
 import os
 from PIL import Image
-
+import cv2
 # Class for dataset
 
 
@@ -17,13 +17,14 @@ class DataSet:
             self.__position = 0
             self.add_folder(folder)
             self.__length = len(self.__folders_list)
+            print(len(self.__folders_list))
         else:
             raise SystemExit
 
     def add_folder(self, folder_name):
         for cur_folder in os.listdir(folder_name):
             new_path = folder_name + '/' + cur_folder
-            if cur_folder == 'Masks':
+            if cur_folder == 'Masks' and len(os.listdir(folder_name + '/' + cur_folder)) != 0:
                 self.__folders_list.append(folder_name)
                 sum = 0
                 if len(self.__images_amount) is not 0:
@@ -47,7 +48,7 @@ class DataSet:
         mask_name = images_list[idx - min_idx].split("Flying")[0]
         for mask in os.listdir(self.__folders_list[j] + "/Masks"):
             if mask_name in mask:
-                return Image.open(image_path), Image.open(self.__folders_list[j] + "/Masks/" + mask)
+                return cv2.imread(image_path), cv2.imread(self.__folders_list[j] + "/Masks/" + mask)
         return 1
 
     def get_size(self):
