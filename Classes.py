@@ -44,12 +44,12 @@ class DataSet:
         if j is not 0:
             min_idx = self.__images_amount[j - 1]
         images_list = os.listdir(self.__folders_list[j] + "/Pictures")
-        image_path = self.__folders_list[j] + '/Pictures/' + images_list[idx - min_idx]
-        mask_name = images_list[idx - min_idx].split("Flying")[0]
+        image_path = self.__folders_list[j] + '/Pictures/' + images_list[idx - min_idx - 1]
+        mask_name = images_list[idx - min_idx - 1].split("Flying")[0]
         for mask in os.listdir(self.__folders_list[j] + "/Masks"):
             if mask_name in mask:
                 return cv2.imread(image_path), cv2.imread(self.__folders_list[j] + "/Masks/" + mask)
-        return 1
+        return None, None
 
     def get_size(self):
         return self.__images_amount[-1]

@@ -16,7 +16,7 @@ from albumentations import (
 #%% Creating the Dataset
 tmp = DataSet(Constants.archive_name)
 print(tmp.get_size())
-img, mask = tmp.get_image(1000)
+img, mask = tmp.get_image(0)
 if mask is None:
     print("NONE")
 else:
@@ -41,8 +41,11 @@ batch = 100
 for i in range(0, size, batch):
     for j in range(batch):
         im, m = tmp.get_image(i + j)
+        if im is None or mask is None:
+            im, m = tmp.get_image(0)
         images.append(im)
         masks.append(m)
+        print(i + j)
 
     original_height, original_width = images[0].shape[0], images[0].shape[1]
     # rotate and noise with crop
