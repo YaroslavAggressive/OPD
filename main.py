@@ -38,9 +38,9 @@ size = int(tmp.get_size())
 images = []
 masks = []
 batch = 100
-for i in range(int(size/batch)):
+for i in range(0, size, batch):
     for j in range(batch):
-        im, m = tmp.get_image(i)
+        im, m = tmp.get_image(i + j)
         images.append(im)
         masks.append(m)
 
@@ -60,7 +60,7 @@ for i in range(int(size/batch)):
 
     for k in range(batch):
         augmented = aug(image=images[k], mask=masks[k])
-        Image.fromarray(augmented['image']).save(augmentation_path + "/Images/" + str(int(size / 2) + k + batch + i) + '.jpeg')
-        Image.fromarray(augmented['mask']).save(augmentation_path + "/Masks/" + str(int(size / 2) + k + batch + i) + 'PalleteMask.jpeg')
+        Image.fromarray(augmented['image']).save(augmentation_path + "/Images/" + str(int(size / 2) + k + i) + '.jpeg')
+        Image.fromarray(augmented['mask']).save(augmentation_path + "/Masks/" + str(int(size / 2) + k + i) + 'PalleteMask.jpeg')
     images.clear()
     masks.clear()
