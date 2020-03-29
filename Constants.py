@@ -1,7 +1,12 @@
 # Here will be stored objects which are used during the whole period of program
 
 # Insert your way
-# archive_name = "E:/Flying_Pallets"
-archive_name = "C:/Users/userr/Desktop/учеба не нужна/прога/python/OPD data/train"
 
+from getpass import getuser
 
+#archive_name = "C:/Users/" + getuser() + "/OneDrive - Peter the Great St. Petersburg Polytechnical University/DataSet for " \
+#               "Training and Testing Dataset/SortedSet/NeuralTraining"
+archive_name = "C:/myfiles/OPD/DataSet_for_Training_and_Testing_Dataset/SortedSet/NeuralTraining"
+
+augmentation_path = "C:/myfiles/OPD/DataSet_Augmented"
+#augmentation_path = "C:/Users/" + getuser() + "/OneDrive - Peter the Great St. Petersburg Polytechnical University/DataSet_Augmented_Test"
