@@ -42,7 +42,7 @@ class DataSet:
             j += 1
         min_idx = 0
         if j is not 0:
-            min_idx = self.__images_amount[j - 1]
+            min_idx = self.__images_amount[j - 1]=
         images_list = os.listdir(self.__folders_list[j] + "/Pictures")
         image_path = self.__folders_list[j] + '/Pictures/' + images_list[idx - min_idx - 1]
         mask_name = images_list[idx - min_idx - 1].split("Flying")[0]
