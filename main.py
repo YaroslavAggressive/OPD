@@ -67,3 +67,35 @@ for i in range(0, size, batch):
         Image.fromarray(augmented['mask']).save(augmentation_path + "/Masks/" + str(int(size / 2) + k + i) + 'PalleteMask.jpeg')
     images.clear()
     masks.clear()
+
+    # 1 - разделение на тест и трейн (или делать пакетно, т.е. менять трейн после обучения на одном данных)
+
+index_order = np.random.permutation(dataStorageSize)
+train_indexes = index_order[1:dataStorageSize - 3400]
+test_indexes = index_order[dataStorageSize - 3400: dataStorageSize]
+
+# 2 - перемешивание трейна и теста + дальнейшее обучение сети в несколько эпох
+
+train = {i: i for i in tmp} # filling in dictionary quantity of training images
+tmp = DataSet(Constants.archive_name_test)
+test = {i: i for i in tmp} # filling in dictionary quantity of testing images
+
+batchSizeTrain = 10
+batchSizeTest = 4
+
+for epoch in range(100):
+    order = np.random.permutation(int(tmp.get_size())) # for changing order in each epoch
+    for startIndex in range(0, int(tmp.get_size())):
+
+        batchIndexesTrain = order[startIndex: startIndex + batchSizeTrain]
+        batchIndexesTest = order[startIndex: startIndex + batchSizeTest]
+        k = 0
+        for i in batchIndexesTrain:
+            tempTrain[i] = {k : train[i]}
+            k += 1
+        k = 0
+        for i in batchIndexesTest:
+            tempTest[i] = {k : test[i]}
+            k += 1
+        FCN.train(tempTrain, epoch)
+        FCN.test(tempTest, epoch)
